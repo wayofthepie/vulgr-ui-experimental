@@ -5,51 +5,37 @@
 
 import React from 'react';
 import {Link} from 'react-router';
-import AnalysisList from '../analysis/AnalysisList';
-import uuidV4 from 'uuid/v4';
+import {ToolbarGroup, ToolbarTitle, ToolbarSeparator} from 'material-ui/Toolbar';
+import AnalysisSummaryCard from '../analysis/summary/AnalysisSummaryCard';
 
-/**
- * Mock up some data for now.
- */
-let createAnalysis = (projectId, vulnerabilities) => {
-  return {
-    timestamp: new Date(Date.now()).toUTCString(),
-    id: uuidV4(),
-    projectId,
-    vulnerabilities
-  };
+// Some fake data.
+const ANALYSIS = {
+  displayName: 'Spring Core',
+  version: '4.1.0',
+  timestamp: '12 September 2017 @ 15:30:12',
+  vulnerabilities: [{
+    id: 'CVE-1999-018',
+    summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non nibh vitae ' +
+    'ipsum aliquam posuere volutpat id arcu. Nunc finibus, turpis vel lobortis laoreet, nisl diam ' +
+    'tincidunt nibh, non condimentum mi ante sed risus. Curabitur fermentum nunc ac mi varius tincidunt. ' +
+    'Morbi vel consequat eros. ' +
+    'Maecenas vitae ligula vitae velit accumsan rutrum. Praesent in nulla ' +
+    'ut odio feugiat ornare ut vitae elit. Donec vitae consectetur purus. Quisque quis tellus nec ' +
+    'nisi rutrum congue nec a lacus. Suspendisse auctor magna eu nunc feugiat, non placerat elit tincidunt.'
+  }, {
+    id: 'CVE-1999-019',
+    summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non nibh vitae ' +
+    'ipsum aliquam posuere volutpat id arcu. Nunc finibus, turpis vel lobortis laoreet, nisl diam ' +
+    'tincidunt nibh, non condimentum mi ante sed risus. Curabitur fermentum nunc ac mi varius tincidunt. ' +
+    'Morbi vel consequat eros. Maecenas vitae ligula vitae velit accumsan rutrum. Praesent in nulla ' +
+    'ut odio feugiat ornare ut vitae elit. Donec vitae consectetur purus. Quisque quis tellus nec ' +
+    'nisi rutrum congue nec a lacus. Suspendisse auctor magna eu nunc feugiat, non placerat elit tincidunt.'
+  }]
 };
-
-/**
- * Some fake data for now.
- */
-const analyses = [
-  createAnalysis('magic-beans', [
-    {
-      id: 'CVE-1999-0018',
-      severity: 2
-    }, {
-      id: 'CVE-1999-0024',
-      severity: 9
-    }, {
-      id: 'CVE-1999-0040',
-      severity: 8
-    },
-  ]),
-  createAnalysis('beanstalk', [])
-];
 
 class HomePage extends React.Component {
   render() {
-    return (
-      <div>
-        <div className='jumbotron'>
-          <h1>Vulgr</h1>
-          <Link to='about' className='btn btn-primary btn-lg'>Learn more</Link>
-        </div>
-        <AnalysisList analyses={analyses} />
-      </div>
-    );
+    return <AnalysisSummaryCard analysis={ANALYSIS} />
   }
 }
 
